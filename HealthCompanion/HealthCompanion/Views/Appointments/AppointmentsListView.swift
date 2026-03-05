@@ -59,7 +59,7 @@ struct AppointmentsListView: View {
             }
             .padding(AppTheme.Spacing.md)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(AppTheme.Background.grouped)
     }
 }
 
@@ -171,7 +171,7 @@ struct AppointmentDetailView: View {
             }
             .padding(AppTheme.Spacing.md)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(AppTheme.Background.grouped)
         .navigationTitle("Appointment")
         .navigationBarTitleDisplayMode(.inline)
     }

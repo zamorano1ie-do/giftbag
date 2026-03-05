@@ -115,7 +115,7 @@ struct AddFamilyMemberView: View {
                 }
                 .padding(AppTheme.Spacing.md)
             }
-            .background(Color(.systemGroupedBackground))
+            .background(AppTheme.Background.grouped)
             .navigationTitle("Add Family Member")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -197,7 +197,7 @@ struct EditFamilyMemberView: View {
             }
             .padding(AppTheme.Spacing.md)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(AppTheme.Background.grouped)
         .navigationTitle(member.firstName)
         .navigationBarTitleDisplayMode(.large)
     }

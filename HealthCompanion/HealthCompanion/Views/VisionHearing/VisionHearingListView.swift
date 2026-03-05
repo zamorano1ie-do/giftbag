@@ -60,7 +60,7 @@ struct VisionHearingListView: View {
             }
             .padding(AppTheme.Spacing.md)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(AppTheme.Background.grouped)
         .sheet(isPresented: $showAddVision) { AddVisionTestView(member: member) }
         .sheet(isPresented: $showAddHearing) { AddHearingTestView(member: member) }
     }

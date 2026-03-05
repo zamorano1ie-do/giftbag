@@ -105,7 +105,7 @@ struct LabResultsListView: View {
             }
             .padding(AppTheme.Spacing.md)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(AppTheme.Background.grouped)
     }
 }
 
@@ -205,22 +205,4 @@ struct LabelValueRow: View {
     }
 }
 
-struct FilterChip: View {
-    let title: String
-    let isSelected: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(AppTheme.Font.label)
-                .fontWeight(isSelected ? .semibold : .regular)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 8)
-                .background(isSelected ? Color.accentColor : Color(.tertiarySystemBackground))
-                .foregroundStyle(isSelected ? .white : .primary)
-                .clipShape(Capsule())
-        }
-        .buttonStyle(.plain)
-    }
-}
+// FilterChip is defined in AppTheme.swift

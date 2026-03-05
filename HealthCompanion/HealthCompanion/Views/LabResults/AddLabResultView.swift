@@ -138,7 +138,7 @@ struct AddLabResultView: View {
                 }
                 .padding(AppTheme.Spacing.md)
             }
-            .background(Color(.systemGroupedBackground))
+            .background(AppTheme.Background.grouped)
             .navigationTitle("Add Lab Result")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

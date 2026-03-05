@@ -32,7 +32,7 @@ struct MedicalHistoryView: View {
                 sectionPicker
                 content
             }
-            .background(Color(.systemGroupedBackground))
+            .background(AppTheme.Background.grouped)
             .navigationTitle("Medical History")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {

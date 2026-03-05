@@ -9,7 +9,7 @@ struct WelcomeView: View {
 
             Image(systemName: "heart.text.clipboard.fill")
                 .font(.system(size: 90))
-                .foregroundStyle(.pink)
+                .foregroundStyle(Color.rose)
                 .symbolEffect(.bounce)
 
             VStack(spacing: AppTheme.Spacing.sm) {
@@ -20,7 +20,7 @@ struct WelcomeView: View {
 
                 Text("Your personal health record — all your health information in one safe place, ready when you need it.")
                     .font(AppTheme.Font.body)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.warmBrown.opacity(0.65))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, AppTheme.Spacing.xl)
             }
@@ -52,7 +52,7 @@ struct WelcomeView: View {
 
             Spacer()
         }
-        .background(Color(.systemGroupedBackground))
+        .background(AppTheme.Background.grouped)
     }
 }
 

@@ -93,7 +93,7 @@ struct AddAppointmentView: View {
                 }
                 .padding(AppTheme.Spacing.md)
             }
-            .background(Color(.systemGroupedBackground))
+            .background(AppTheme.Background.grouped)
             .navigationTitle("Log Doctor Visit")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

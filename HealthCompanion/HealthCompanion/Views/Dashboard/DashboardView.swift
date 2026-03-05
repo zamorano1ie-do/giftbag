@@ -26,7 +26,7 @@ struct DashboardView: View {
                 }
                 .padding(AppTheme.Spacing.md)
             }
-            .background(Color(.systemGroupedBackground))
+            .background(AppTheme.Background.grouped)
             .navigationTitle("My Health")
             .navigationBarTitleDisplayMode(.large)
             .sheet(isPresented: $showQuickAdd) {
@@ -42,10 +42,10 @@ struct DashboardView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(greetingText)
                     .font(AppTheme.Font.heading)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.sage)
                 Text(member.firstName)
                     .font(AppTheme.Font.hero)
-                    .fontWeight(.bold)
+                    .foregroundStyle(Color.warmBrown)
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 4) {
@@ -60,7 +60,7 @@ struct DashboardView: View {
             }
         }
         .padding(AppTheme.Spacing.md)
-        .background(Color(.secondarySystemBackground))
+        .background(Color.blush.opacity(0.25))
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
     }
 
@@ -82,19 +82,20 @@ struct DashboardView: View {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
                 Label("Things to Check", systemImage: "bell.badge.fill")
                     .font(AppTheme.Font.heading)
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(Color.rose)
 
                 ForEach(alerts, id: \.self) { alert in
                     HStack(spacing: AppTheme.Spacing.sm) {
                         Image(systemName: "exclamationmark.circle.fill")
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(Color.rose)
                             .font(.title3)
                         Text(alert)
                             .font(AppTheme.Font.body)
+                            .foregroundStyle(Color.warmBrown)
                         Spacer()
                     }
                     .padding(AppTheme.Spacing.md)
-                    .background(Color.orange.opacity(0.08))
+                    .background(Color.blush.opacity(0.22))
                     .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
                 }
             }
@@ -273,7 +274,7 @@ struct QuickAddView: View {
                 }
                 .padding(AppTheme.Spacing.md)
             }
-            .background(Color(.systemGroupedBackground))
+            .background(AppTheme.Background.grouped)
             .navigationTitle("Record Health Info")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

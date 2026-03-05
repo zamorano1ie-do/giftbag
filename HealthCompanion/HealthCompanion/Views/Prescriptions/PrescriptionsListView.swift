@@ -59,7 +59,7 @@ struct PrescriptionsListView: View {
             }
             .padding(AppTheme.Spacing.md)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(AppTheme.Background.grouped)
     }
 }
 
@@ -246,7 +246,7 @@ struct PrescriptionDetailView: View {
             }
             .padding(AppTheme.Spacing.md)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(AppTheme.Background.grouped)
         .navigationTitle("Medication")
         .navigationBarTitleDisplayMode(.inline)
     }

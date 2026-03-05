@@ -169,7 +169,7 @@ struct AddPrescriptionView: View {
                 }
                 .padding(AppTheme.Spacing.md)
             }
-            .background(Color(.systemGroupedBackground))
+            .background(AppTheme.Background.grouped)
             .navigationTitle("Add Medication")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

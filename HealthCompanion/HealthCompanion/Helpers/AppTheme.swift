@@ -1,49 +1,119 @@
 import SwiftUI
 
-// MARK: - Accessibility-first design system
-// Large text, high contrast, generous tap targets (min 60pt height)
+// MARK: - Pastel Garden colour palette
+// #C75F71  Deep Rose    — primary accent, vitals, key actions
+// #F0B8B8  Blush Pink   — soft backgrounds, lab section, highlights
+// #A2AE9D  Sage Green   — appointments, clinical sections
+// #54463A  Dark Brown   — text, medical history, prescriptions
+
+// MARK: - Open Sans font
+// Font files required in bundle (add to Xcode project target):
+//   OpenSans-Light.ttf, OpenSans-Regular.ttf, OpenSans-Italic.ttf,
+//   OpenSans-SemiBold.ttf, OpenSans-Bold.ttf, OpenSans-ExtraBold.ttf
+// Register in Info.plist under UIAppFonts array.
+
+enum AppFont {
+    enum Weight { case light, regular, semiBold, bold, extraBold }
+
+    static func openSans(_ weight: Weight = .regular, size: CGFloat) -> SwiftUI.Font {
+        let name: String
+        switch weight {
+        case .light:     name = "OpenSans-Light"
+        case .regular:   name = "OpenSans-Regular"
+        case .semiBold:  name = "OpenSans-SemiBold"
+        case .bold:      name = "OpenSans-Bold"
+        case .extraBold: name = "OpenSans-ExtraBold"
+        }
+        // Fallback to system rounded if font not yet loaded
+        let custom = SwiftUI.Font.custom(name, size: size)
+        return custom
+    }
+}
+
+// MARK: - Pastel Garden colours
+
+extension Color {
+    /// #C75F71 — deep rose, primary accent
+    static let rose        = Color(hex: "C75F71")
+    /// #F0B8B8 — blush pink, soft backgrounds & highlights
+    static let blush       = Color(hex: "F0B8B8")
+    /// #A2AE9D — muted sage green, clinical/calm sections
+    static let sage        = Color(hex: "A2AE9D")
+    /// #54463A — warm dark brown, text & structural elements
+    static let warmBrown   = Color(hex: "54463A")
+
+    /// Very light blush — used as grouped background tint
+    static let blushBackground = Color(hex: "FBF0F0")
+
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let r = Double((int & 0xFF0000) >> 16) / 255
+        let g = Double((int & 0x00FF00) >> 8)  / 255
+        let b = Double( int & 0x0000FF)         / 255
+        self.init(red: r, green: g, blue: b)
+    }
+}
+
+// MARK: - Design System
 
 enum AppTheme {
-    // MARK: Typography — all sizes scalable with Dynamic Type
+
+    // MARK: Typography — Open Sans, all sizes scalable with Dynamic Type
     enum Font {
-        static let hero     = SwiftUI.Font.system(size: 34, weight: .bold, design: .rounded)
-        static let title    = SwiftUI.Font.system(size: 28, weight: .bold, design: .rounded)
-        static let heading  = SwiftUI.Font.system(size: 22, weight: .semibold, design: .rounded)
-        static let subhead  = SwiftUI.Font.system(size: 18, weight: .medium, design: .rounded)
-        static let body     = SwiftUI.Font.system(size: 17, weight: .regular, design: .rounded)
-        static let label    = SwiftUI.Font.system(size: 15, weight: .regular, design: .rounded)
-        static let caption  = SwiftUI.Font.system(size: 13, weight: .regular, design: .rounded)
+        static let hero    = AppFont.openSans(.extraBold, size: 34)
+        static let title   = AppFont.openSans(.bold,      size: 28)
+        static let heading = AppFont.openSans(.semiBold,  size: 22)
+        static let subhead = AppFont.openSans(.semiBold,  size: 18)
+        static let body    = AppFont.openSans(.regular,   size: 17)
+        static let label   = AppFont.openSans(.regular,   size: 15)
+        static let caption = AppFont.openSans(.light,     size: 13)
     }
 
     // MARK: Spacing
     enum Spacing {
-        static let xs: CGFloat   = 4
-        static let sm: CGFloat   = 8
-        static let md: CGFloat   = 16
-        static let lg: CGFloat   = 24
-        static let xl: CGFloat   = 32
-        static let xxl: CGFloat  = 48
+        static let xs: CGFloat  = 4
+        static let sm: CGFloat  = 8
+        static let md: CGFloat  = 16
+        static let lg: CGFloat  = 24
+        static let xl: CGFloat  = 32
+        static let xxl: CGFloat = 48
     }
 
     // MARK: Corner radius
     enum Radius {
-        static let sm: CGFloat  = 10
-        static let md: CGFloat  = 16
-        static let lg: CGFloat  = 24
+        static let sm: CGFloat = 10
+        static let md: CGFloat = 16
+        static let lg: CGFloat = 24
     }
 
-    // MARK: Minimum tap target height
+    // MARK: Minimum tap target height (accessibility)
     static let tapTargetHeight: CGFloat = 60
 
-    // MARK: Section colours (used as tint + card background)
+    // MARK: Section colours — all drawn from Pastel Garden palette
     enum Section {
-        static let vitals:       Color = Color(red: 0.93, green: 0.23, blue: 0.38)  // rose
-        static let labs:         Color = Color(red: 0.20, green: 0.55, blue: 0.93)  // blue
-        static let appointments: Color = Color(red: 0.20, green: 0.70, blue: 0.50)  // teal
-        static let prescriptions: Color = Color(red: 0.58, green: 0.35, blue: 0.90) // purple
-        static let history:      Color = Color(red: 0.95, green: 0.55, blue: 0.18)  // orange
-        static let vision:       Color = Color(red: 0.12, green: 0.65, blue: 0.80)  // cyan
-        static let hearing:      Color = Color(red: 0.88, green: 0.42, blue: 0.18)  // amber
+        /// Vitals, primary actions → deep rose
+        static let vitals:        Color = .rose
+        /// Lab results → sage (calm, clinical)
+        static let labs:          Color = .sage
+        /// Doctor appointments → sage
+        static let appointments:  Color = .sage
+        /// Prescriptions → warm brown
+        static let prescriptions: Color = .warmBrown
+        /// Medical history → warm brown
+        static let history:       Color = .warmBrown
+        /// Vision → blush-tinted rose
+        static let vision:        Color = Color(hex: "D4818A")   // rose lightened
+        /// Hearing → sage darkened
+        static let hearing:       Color = Color(hex: "7E9479")   // sage darkened
+    }
+
+    // MARK: Background tints
+    enum Background {
+        static let grouped  = Color.blushBackground
+        static let card     = Color(.secondarySystemBackground)
+        static let input    = Color(.tertiarySystemBackground)
     }
 }
 
@@ -55,7 +125,7 @@ struct PrimaryButton: View {
     let color: Color
     let action: () -> Void
 
-    init(_ title: String, icon: String? = nil, color: Color = .accentColor, action: @escaping () -> Void) {
+    init(_ title: String, icon: String? = nil, color: Color = .rose, action: @escaping () -> Void) {
         self.title = title
         self.icon = icon
         self.color = color
@@ -71,7 +141,6 @@ struct PrimaryButton: View {
                 }
                 Text(title)
                     .font(AppTheme.Font.subhead)
-                    .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)
             .frame(height: AppTheme.tapTargetHeight)
@@ -87,15 +156,12 @@ struct PrimaryButton: View {
 
 struct SectionCard<Content: View>: View {
     let content: Content
-
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
+    init(@ViewBuilder content: () -> Content) { self.content = content() }
 
     var body: some View {
         content
             .padding(AppTheme.Spacing.md)
-            .background(Color(.secondarySystemBackground))
+            .background(AppTheme.Background.card)
             .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
     }
 }
@@ -149,15 +215,16 @@ struct EmptyStateView: View {
             Spacer()
             Image(systemName: icon)
                 .font(.system(size: 64))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.blush)
 
             VStack(spacing: AppTheme.Spacing.sm) {
                 Text(title)
                     .font(AppTheme.Font.heading)
+                    .foregroundStyle(Color.warmBrown)
                     .multilineTextAlignment(.center)
                 Text(message)
                     .font(AppTheme.Font.body)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.warmBrown.opacity(0.6))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, AppTheme.Spacing.xl)
             }
@@ -170,7 +237,7 @@ struct EmptyStateView: View {
     }
 }
 
-// MARK: - Large Row Item (used in lists — tall tap target)
+// MARK: - Large Row Item
 
 struct LargeListRow<Leading: View, Trailing: View>: View {
     let leading: Leading
@@ -178,7 +245,9 @@ struct LargeListRow<Leading: View, Trailing: View>: View {
     let subtitle: String
     let trailing: Trailing
 
-    init(title: String, subtitle: String, @ViewBuilder leading: () -> Leading, @ViewBuilder trailing: () -> Trailing) {
+    init(title: String, subtitle: String,
+         @ViewBuilder leading: () -> Leading,
+         @ViewBuilder trailing: () -> Trailing) {
         self.title = title
         self.subtitle = subtitle
         self.leading = leading()
@@ -188,20 +257,16 @@ struct LargeListRow<Leading: View, Trailing: View>: View {
     var body: some View {
         HStack(spacing: AppTheme.Spacing.md) {
             leading
-
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(AppTheme.Font.subhead)
-                    .fontWeight(.semibold)
                 if !subtitle.isEmpty {
                     Text(subtitle)
                         .font(AppTheme.Font.label)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.warmBrown.opacity(0.55))
                 }
             }
-
             Spacer()
-
             trailing
         }
         .padding(.vertical, AppTheme.Spacing.sm)
@@ -225,10 +290,10 @@ struct VoiceInputButton: View {
                 Text(isRecording ? "Listening…" : "Speak to fill in")
                     .font(AppTheme.Font.body)
             }
-            .foregroundStyle(isRecording ? Color.red : Color.accentColor)
+            .foregroundStyle(isRecording ? Color.rose : Color.rose.opacity(0.8))
             .frame(maxWidth: .infinity)
             .frame(height: AppTheme.tapTargetHeight)
-            .background((isRecording ? Color.red : Color.accentColor).opacity(0.1))
+            .background(Color.blush.opacity(isRecording ? 0.35 : 0.18))
             .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
         }
         .buttonStyle(.plain)
@@ -245,14 +310,40 @@ struct CameraCaptureButton: View {
             HStack(spacing: AppTheme.Spacing.sm) {
                 Image(systemName: "camera.fill")
                     .font(.system(size: 22))
-                Text("Take a Photo")
+                Text("Scan Document")
                     .font(AppTheme.Font.body)
             }
-            .foregroundStyle(.white)
+            .foregroundStyle(Color.warmBrown)
             .frame(maxWidth: .infinity)
             .frame(height: AppTheme.tapTargetHeight)
-            .background(Color.secondary)
+            .background(Color.sage.opacity(0.18))
+            .overlay(
+                RoundedRectangle(cornerRadius: AppTheme.Radius.md)
+                    .stroke(Color.sage, lineWidth: 1.5)
+            )
             .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+// MARK: - Filter Chip (already used in LabResults, defined here centrally)
+
+struct FilterChip: View {
+    let title: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(AppTheme.Font.label)
+                .fontWeight(isSelected ? .semibold : .regular)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(isSelected ? Color.rose : AppTheme.Background.card)
+                .foregroundStyle(isSelected ? .white : Color.warmBrown)
+                .clipShape(Capsule())
         }
         .buttonStyle(.plain)
     }

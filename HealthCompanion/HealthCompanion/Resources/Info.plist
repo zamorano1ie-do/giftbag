@@ -49,5 +49,18 @@
     <true/>
     <key>UISupportsDocumentBrowser</key>
     <false/>
+
+    <!-- Open Sans custom fonts
+         Add these .ttf files to the Xcode project target (copy bundle resources).
+         Download from https://fonts.google.com/specimen/Open+Sans -->
+    <key>UIAppFonts</key>
+    <array>
+        <string>OpenSans-Light.ttf</string>
+        <string>OpenSans-Regular.ttf</string>
+        <string>OpenSans-Italic.ttf</string>
+        <string>OpenSans-SemiBold.ttf</string>
+        <string>OpenSans-Bold.ttf</string>
+        <string>OpenSans-ExtraBold.ttf</string>
+    </array>
 </dict>
 </plist>
