@@ -190,7 +190,7 @@ struct AcuityInput: View {
                         .frame(minWidth: 44)
                         .padding(8)
                         .background(Color.accentColor.opacity(0.1))
-                        .foregroundStyle(.accentColor)
+                        .foregroundStyle(.tint)
                         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
                 }
             }

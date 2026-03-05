@@ -25,7 +25,7 @@ struct AddFamilyMemberView: View {
                     VStack(spacing: AppTheme.Spacing.sm) {
                         Image(systemName: "person.circle.fill")
                             .font(.system(size: 80))
-                            .foregroundStyle(.accentColor)
+                            .foregroundStyle(.tint)
                         Text("Who are we adding?")
                             .font(AppTheme.Font.heading)
                     }

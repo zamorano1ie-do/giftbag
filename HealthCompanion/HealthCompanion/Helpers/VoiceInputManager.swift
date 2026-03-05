@@ -128,7 +128,7 @@ struct VoiceTextField: View {
                 } label: {
                     Image(systemName: voiceManager.isRecording ? "waveform.circle.fill" : "mic.circle.fill")
                         .font(.system(size: 32))
-                        .foregroundStyle(voiceManager.isRecording ? .red : .accentColor)
+                        .foregroundStyle(voiceManager.isRecording ? .red : .tint)
                         .symbolEffect(.pulse, isActive: voiceManager.isRecording)
                 }
                 .frame(width: 44, height: 44)

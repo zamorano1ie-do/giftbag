@@ -41,7 +41,7 @@ struct AddLabResultView: View {
                         .font(AppTheme.Font.body)
                         .padding(AppTheme.Spacing.md)
                         .background(Color.accentColor.opacity(0.1))
-                        .foregroundStyle(.accentColor)
+                        .foregroundStyle(.tint)
                         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
                     }
                     .buttonStyle(.plain)
