@@ -2,6 +2,8 @@ import Foundation
 import Speech
 import AVFoundation
 import Combine
+import SwiftUI
+import UIKit
 
 // MARK: - Voice Input Manager
 // Allows users (especially elderly) to speak instead of type
