@@ -131,7 +131,7 @@ struct DashboardView: View {
             !$0.isPast && $0.date.timeIntervalSinceNow < 7 * 24 * 3600
         }
         for appt in upcoming {
-            alerts.append("Appointment with \($0.doctorName) on \($0.date.formatted(date: .abbreviated, time: .shortened))")
+            alerts.append("Appointment with \(appt.doctorName) on \(appt.date.formatted(date: .abbreviated, time: .shortened))")
         }
         _ = upcoming // suppress warning
 
@@ -235,9 +235,12 @@ struct StatCard: View {
             Spacer()
             Text(value)
                 .font(.system(size: 34, weight: .bold, design: .rounded))
+                .minimumScaleFactor(0.5)
+                .lineLimit(1)
             Text(subtitle.isEmpty ? title : subtitle)
                 .font(AppTheme.Font.caption)
                 .foregroundStyle(.secondary)
+                .minimumScaleFactor(0.7)
                 .lineLimit(2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

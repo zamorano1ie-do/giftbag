@@ -183,7 +183,7 @@ struct AddAllergyView: View {
                                 Button { severity = sev } label: {
                                     HStack {
                                         Image(systemName: severity == sev ? "largecircle.fill.circle" : "circle")
-                                            .foregroundStyle(severity == sev ? .accentColor : .secondary)
+                                            .foregroundStyle(severity == sev ? Color.accentColor : Color.secondary)
                                         Text(sev.rawValue).font(AppTheme.Font.body)
                                         Spacer()
                                     }
@@ -247,7 +247,7 @@ struct AddVaccinationView: View {
                                             Text(v).font(AppTheme.Font.label)
                                                 .padding(.horizontal, 12).padding(.vertical, 8)
                                                 .background(name == v ? Color.accentColor.opacity(0.2) : Color(.tertiarySystemBackground))
-                                                .foregroundStyle(name == v ? .accentColor : .primary)
+                                                .foregroundStyle(name == v ? Color.accentColor : Color.primary)
                                                 .clipShape(Capsule())
                                         }.buttonStyle(.plain)
                                     }

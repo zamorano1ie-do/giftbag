@@ -2,6 +2,8 @@ import Foundation
 import Speech
 import AVFoundation
 import Combine
+import SwiftUI
+import UIKit
 
 // MARK: - Voice Input Manager
 // Allows users (especially elderly) to speak instead of type
@@ -126,7 +128,7 @@ struct VoiceTextField: View {
                 } label: {
                     Image(systemName: voiceManager.isRecording ? "waveform.circle.fill" : "mic.circle.fill")
                         .font(.system(size: 32))
-                        .foregroundStyle(voiceManager.isRecording ? .red : .accentColor)
+                        .foregroundStyle(voiceManager.isRecording ? Color.red : Color.accentColor)
                         .symbolEffect(.pulse, isActive: voiceManager.isRecording)
                 }
                 .frame(width: 44, height: 44)

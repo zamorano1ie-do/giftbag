@@ -148,7 +148,7 @@ struct VitalTypeCard: View {
                 } label: {
                     Text(showAll ? "Show Less" : "Show All \(readings.count) Readings")
                         .font(AppTheme.Font.body)
-                        .foregroundStyle(.accentColor)
+                        .foregroundStyle(.tint)
                         .frame(maxWidth: .infinity)
                         .frame(height: AppTheme.tapTargetHeight)
                 }

@@ -63,6 +63,8 @@ struct AddPrescriptionView: View {
                                                 .font(.title2)
                                             Text(f.rawValue)
                                                 .font(AppTheme.Font.caption)
+                                                .minimumScaleFactor(0.5)
+                                                .lineLimit(1)
                                         }
                                         .frame(width: 80, height: 70)
                                         .background(form == f ? AppTheme.Section.prescriptions : Color(.tertiarySystemBackground))
@@ -87,6 +89,8 @@ struct AddPrescriptionView: View {
                                         } label: {
                                             Text(freq)
                                                 .font(AppTheme.Font.label)
+                                                .minimumScaleFactor(0.7)
+                                                .lineLimit(1)
                                                 .padding(.horizontal, 12)
                                                 .padding(.vertical, 8)
                                                 .background(frequency == freq ? AppTheme.Section.prescriptions.opacity(0.2) : Color(.tertiarySystemBackground))
