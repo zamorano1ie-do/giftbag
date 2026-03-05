@@ -79,7 +79,7 @@
 		A401 /* HealthCompanion */ = {
 			isa = PBXGroup;
 			children = (
-				A101, A102,
+				A101,
 				A410, A420, A430,
 				A200,
 			);
@@ -100,7 +100,7 @@
 		};
 		A430 /* Views */ = {
 			isa = PBXGroup;
-			children = (A431, A432, A433, A434, A435, A436, A437, A438);
+			children = (A102, A431, A432, A433, A434, A435, A436, A437, A438);
 			path = Views;
 			sourceTree = "<group>";
 		};
