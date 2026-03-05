@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct HealthCompanionApp: App {
+struct SlainteApp: App {
     init() {
         applyGlobalAppearance()
     }

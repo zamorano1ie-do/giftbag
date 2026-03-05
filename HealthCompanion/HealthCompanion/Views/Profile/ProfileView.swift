@@ -37,7 +37,7 @@ struct ProfileView: View {
 
                         SectionCard {
                             VStack(spacing: 0) {
-                                InfoRow(label: "App", value: "Health Companion")
+                                InfoRow(label: "App", value: "Sláinte")
                                 Divider()
                                 InfoRow(label: "Version", value: "1.0")
                                 Divider()

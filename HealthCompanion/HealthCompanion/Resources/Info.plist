@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDisplayName</key>
-    <string>Health Companion</string>
+    <string>Sláinte</string>
     <key>CFBundleIdentifier</key>
-    <string>com.healthcompanion.app</string>
+    <string>com.slainte.app</string>
     <key>CFBundleName</key>
-    <string>HealthCompanion</string>
+    <string>Slainte</string>
     <key>CFBundleShortVersionString</key>
     <string>1.0</string>
     <key>CFBundleVersion</key>
@@ -33,16 +33,16 @@
 
     <!-- Privacy descriptions — required for App Store -->
     <key>NSMicrophoneUsageDescription</key>
-    <string>Health Companion uses your microphone so you can speak your health information instead of typing — especially helpful for hands-free entry.</string>
+    <string>Sláinte uses your microphone so you can speak your health information instead of typing — especially helpful for hands-free entry.</string>
 
     <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Health Companion converts your speech to text so you can quickly enter health information by voice.</string>
+    <string>Sláinte converts your speech to text so you can quickly enter health information by voice.</string>
 
     <key>NSCameraUsageDescription</key>
-    <string>Health Companion uses your camera to scan prescriptions, lab reports, and other health documents using the built-in document scanner.</string>
+    <string>Sláinte uses your camera to scan prescriptions, lab reports, and other health documents using the built-in document scanner.</string>
 
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Health Companion lets you choose photos of health documents from your photo library to attach to your records.</string>
+    <string>Sláinte lets you choose photos of health documents from your photo library to attach to your records.</string>
 
     <!-- Accessibility -->
     <key>UIAccessibilityLargeTextEnabled</key>

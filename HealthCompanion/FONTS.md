@@ -12,9 +12,9 @@ The app uses **Open Sans** (Google Fonts, SIL Open Font Licence).
    - `OpenSans-SemiBold.ttf`
    - `OpenSans-Bold.ttf`
    - `OpenSans-ExtraBold.ttf`
-3. Drag all six files into Xcode → `HealthCompanion/Resources/Fonts/`
+3. Drag all six files into Xcode → `Slainte/Resources/Fonts/`
    - Make sure **"Copy items if needed"** is checked
-   - Make sure **"Add to target: HealthCompanion"** is checked
+   - Make sure **"Add to target: Slainte"** is checked
 4. The `Info.plist` already has the `UIAppFonts` array registered — no further changes needed.
 5. Build & run. If fonts do not load, verify the file names exactly match those listed above.
 

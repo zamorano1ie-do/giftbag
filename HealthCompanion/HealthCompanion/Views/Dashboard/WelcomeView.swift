@@ -13,7 +13,7 @@ struct WelcomeView: View {
                 .symbolEffect(.bounce)
 
             VStack(spacing: AppTheme.Spacing.sm) {
-                Text("Welcome to\nHealth Companion")
+                Text("Welcome to\nSláinte")
                     .font(AppTheme.Font.hero)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
