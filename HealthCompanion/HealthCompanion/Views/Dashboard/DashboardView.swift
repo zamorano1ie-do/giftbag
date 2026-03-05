@@ -131,7 +131,7 @@ struct DashboardView: View {
             !$0.isPast && $0.date.timeIntervalSinceNow < 7 * 24 * 3600
         }
         for appt in upcoming {
-            alerts.append("Appointment with \($0.doctorName) on \($0.date.formatted(date: .abbreviated, time: .shortened))")
+            alerts.append("Appointment with \(appt.doctorName) on \(appt.date.formatted(date: .abbreviated, time: .shortened))")
         }
         _ = upcoming // suppress warning
 
