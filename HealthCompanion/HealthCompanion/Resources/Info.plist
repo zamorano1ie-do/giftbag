@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDisplayName</key>
+    <string>Sláinte</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.slainte.app</string>
+    <key>CFBundleName</key>
+    <string>Slainte</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>MinimumOSVersion</key>
+    <string>17.0</string>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+        <string>armv7</string>
+    </array>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+    </dict>
+
+    <!-- Privacy descriptions — required for App Store -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Sláinte uses your microphone so you can speak your health information instead of typing — especially helpful for hands-free entry.</string>
+
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Sláinte converts your speech to text so you can quickly enter health information by voice.</string>
+
+    <key>NSCameraUsageDescription</key>
+    <string>Sláinte uses your camera to scan prescriptions, lab reports, and other health documents using the built-in document scanner.</string>
+
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Sláinte lets you choose photos of health documents from your photo library to attach to your records.</string>
+
+    <!-- Accessibility -->
+    <key>UIAccessibilityLargeTextEnabled</key>
+    <true/>
+    <key>UISupportsDocumentBrowser</key>
+    <false/>
+
+    <!-- Open Sans custom fonts
+         Add these .ttf files to the Xcode project target (copy bundle resources).
+         Download from https://fonts.google.com/specimen/Open+Sans -->
+    <key>UIAppFonts</key>
+    <array>
+        <string>OpenSans-Light.ttf</string>
+        <string>OpenSans-Regular.ttf</string>
+        <string>OpenSans-Italic.ttf</string>
+        <string>OpenSans-SemiBold.ttf</string>
+        <string>OpenSans-Bold.ttf</string>
+        <string>OpenSans-ExtraBold.ttf</string>
+    </array>
+</dict>
+</plist>

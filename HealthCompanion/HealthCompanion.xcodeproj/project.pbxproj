@@ -1,0 +1,359 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A001 /* HealthCompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A101; };
+		A002 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102; };
+		A003 /* FamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103; };
+		A004 /* VitalReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104; };
+		A005 /* LabResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105; };
+		A006 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106; };
+		A007 /* Prescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A107; };
+		A008 /* MedicalHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A108; };
+		A009 /* VisionHearing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A109; };
+		A010 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A110; };
+		A011 /* VoiceInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111; };
+		A012 /* CameraCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112; };
+		A013 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A113; };
+		A014 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A114; };
+		A015 /* VitalsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A115; };
+		A016 /* AddVitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A116; };
+		A017 /* LabResultsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A117; };
+		A018 /* AddLabResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A118; };
+		A019 /* AppointmentsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A119; };
+		A020 /* AddAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A120; };
+		A021 /* PrescriptionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A121; };
+		A022 /* AddPrescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A122; };
+		A023 /* MedicalHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123; };
+		A024 /* AddHistoryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A124; };
+		A025 /* VisionHearingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A125; };
+		A026 /* AddVisionHearingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126; };
+		A027 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A127; };
+		A028 /* AddFamilyMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A128; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A101 /* HealthCompanionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCompanionApp.swift; sourceTree = "<group>"; };
+		A102 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		A103 /* FamilyMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMember.swift; sourceTree = "<group>"; };
+		A104 /* VitalReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalReading.swift; sourceTree = "<group>"; };
+		A105 /* LabResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabResult.swift; sourceTree = "<group>"; };
+		A106 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
+		A107 /* Prescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prescription.swift; sourceTree = "<group>"; };
+		A108 /* MedicalHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalHistory.swift; sourceTree = "<group>"; };
+		A109 /* VisionHearing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHearing.swift; sourceTree = "<group>"; };
+		A110 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		A111 /* VoiceInputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceInputManager.swift; sourceTree = "<group>"; };
+		A112 /* CameraCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCapture.swift; sourceTree = "<group>"; };
+		A113 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		A114 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		A115 /* VitalsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsListView.swift; sourceTree = "<group>"; };
+		A116 /* AddVitalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVitalView.swift; sourceTree = "<group>"; };
+		A117 /* LabResultsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabResultsListView.swift; sourceTree = "<group>"; };
+		A118 /* AddLabResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabResultView.swift; sourceTree = "<group>"; };
+		A119 /* AppointmentsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsListView.swift; sourceTree = "<group>"; };
+		A120 /* AddAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAppointmentView.swift; sourceTree = "<group>"; };
+		A121 /* PrescriptionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrescriptionsListView.swift; sourceTree = "<group>"; };
+		A122 /* AddPrescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPrescriptionView.swift; sourceTree = "<group>"; };
+		A123 /* MedicalHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalHistoryView.swift; sourceTree = "<group>"; };
+		A124 /* AddHistoryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHistoryViews.swift; sourceTree = "<group>"; };
+		A125 /* VisionHearingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionHearingListView.swift; sourceTree = "<group>"; };
+		A126 /* AddVisionHearingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVisionHearingViews.swift; sourceTree = "<group>"; };
+		A127 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A128 /* AddFamilyMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFamilyMemberView.swift; sourceTree = "<group>"; };
+		A200 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A300 /* HealthCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		A400 = {
+			isa = PBXGroup;
+			children = (A401, A500);
+			sourceTree = "<group>";
+		};
+		A401 /* HealthCompanion */ = {
+			isa = PBXGroup;
+			children = (
+				A101, A102,
+				A410, A420, A430,
+				A200,
+			);
+			path = HealthCompanion;
+			sourceTree = "<group>";
+		};
+		A410 /* Models */ = {
+			isa = PBXGroup;
+			children = (A103, A104, A105, A106, A107, A108, A109);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A420 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (A110, A111, A112);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A430 /* Views */ = {
+			isa = PBXGroup;
+			children = (A431, A432, A433, A434, A435, A436, A437, A438);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A431 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (A113, A114);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		A432 /* Vitals */ = {
+			isa = PBXGroup;
+			children = (A115, A116);
+			path = Vitals;
+			sourceTree = "<group>";
+		};
+		A433 /* LabResults */ = {
+			isa = PBXGroup;
+			children = (A117, A118);
+			path = LabResults;
+			sourceTree = "<group>";
+		};
+		A434 /* Appointments */ = {
+			isa = PBXGroup;
+			children = (A119, A120);
+			path = Appointments;
+			sourceTree = "<group>";
+		};
+		A435 /* Prescriptions */ = {
+			isa = PBXGroup;
+			children = (A121, A122);
+			path = Prescriptions;
+			sourceTree = "<group>";
+		};
+		A436 /* MedicalHistory */ = {
+			isa = PBXGroup;
+			children = (A123, A124);
+			path = MedicalHistory;
+			sourceTree = "<group>";
+		};
+		A437 /* VisionHearing */ = {
+			isa = PBXGroup;
+			children = (A125, A126);
+			path = VisionHearing;
+			sourceTree = "<group>";
+		};
+		A438 /* Profile */ = {
+			isa = PBXGroup;
+			children = (A127, A128);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		A500 /* Products */ = {
+			isa = PBXGroup;
+			children = (A300);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A600 /* HealthCompanion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A700;
+			buildPhases = (A610, A620);
+			buildRules = ();
+			dependencies = ();
+			name = HealthCompanion;
+			productName = HealthCompanion;
+			productReference = A300;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A800 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = { A600 = { CreatedOnToolsVersion = 15.0; }; };
+			};
+			buildConfigurationList = A810;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = A400;
+			productRefGroup = A500;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (A600);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A610 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A001, A002, A003, A004, A005, A006, A007, A008, A009,
+				A010, A011, A012, A013, A014, A015, A016, A017, A018,
+				A019, A020, A021, A022, A023, A024, A025, A026, A027, A028,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A620 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A701 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = HealthCompanion/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.slainte.app;
+				PRODUCT_NAME = Slainte;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A702 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = HealthCompanion/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.slainte.app;
+				PRODUCT_NAME = Slainte;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		A811 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A700 /* Build configuration list for PBXNativeTarget */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (A701, A702);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A810 /* Build configuration list for PBXProject */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (A811, A812);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = A800 /* Project object */;
+}
