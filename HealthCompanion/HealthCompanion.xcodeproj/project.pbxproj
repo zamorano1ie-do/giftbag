@@ -35,6 +35,13 @@
 		A026 /* AddVisionHearingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126; };
 		A027 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A127; };
 		A028 /* AddFamilyMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A128; };
+		A029 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A201; };
+		A030 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A202; };
+		A031 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A203; };
+		A032 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A204; };
+		A033 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A205; };
+		A034 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A206; };
+		A035 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A207; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +74,13 @@
 		A127 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A128 /* AddFamilyMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFamilyMemberView.swift; sourceTree = "<group>"; };
 		A200 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A201 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		A202 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		A203 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		A204 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		A205 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		A206 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		A207 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A300 /* HealthCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,9 +95,21 @@
 			children = (
 				A101,
 				A410, A420, A430,
-				A200,
+				A450,
 			);
 			path = HealthCompanion;
+			sourceTree = "<group>";
+		};
+		A450 /* Resources */ = {
+			isa = PBXGroup;
+			children = (A207, A200, A451);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A451 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (A201, A202, A203, A204, A205, A206);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		A410 /* Models */ = {
@@ -213,7 +239,15 @@
 		A620 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
-			files = ();
+			files = (
+				A035 /* Assets.xcassets in Resources */,
+				A029 /* OpenSans-Light.ttf in Resources */,
+				A030 /* OpenSans-Regular.ttf in Resources */,
+				A031 /* OpenSans-Italic.ttf in Resources */,
+				A032 /* OpenSans-SemiBold.ttf in Resources */,
+				A033 /* OpenSans-Bold.ttf in Resources */,
+				A034 /* OpenSans-ExtraBold.ttf in Resources */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
