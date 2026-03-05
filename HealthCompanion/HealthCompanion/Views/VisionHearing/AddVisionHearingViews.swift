@@ -97,7 +97,7 @@ struct AddVisionTestView: View {
                             if hasIOP {
                                 HStack(spacing: AppTheme.Spacing.md) {
                                     VStack(alignment: .leading, spacing: 4) {
-                                        Text("Right (mmHg)").font(AppTheme.Font.label).foregroundStyle(.secondary)
+                                        Text("Right (mmHg)").font(AppTheme.Font.label).foregroundStyle(.secondary).minimumScaleFactor(0.5).lineLimit(1)
                                         TextField("e.g. 16", text: $iopR).keyboardType(.decimalPad)
                                             .font(.system(size: 22, weight: .bold, design: .rounded))
                                             .padding(AppTheme.Spacing.md)
@@ -105,7 +105,7 @@ struct AddVisionTestView: View {
                                             .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
                                     }
                                     VStack(alignment: .leading, spacing: 4) {
-                                        Text("Left (mmHg)").font(AppTheme.Font.label).foregroundStyle(.secondary)
+                                        Text("Left (mmHg)").font(AppTheme.Font.label).foregroundStyle(.secondary).minimumScaleFactor(0.5).lineLimit(1)
                                         TextField("e.g. 16", text: $iopL).keyboardType(.decimalPad)
                                             .font(.system(size: 22, weight: .bold, design: .rounded))
                                             .padding(AppTheme.Spacing.md)

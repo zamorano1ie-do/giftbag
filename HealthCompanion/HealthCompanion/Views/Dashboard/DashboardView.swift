@@ -235,9 +235,12 @@ struct StatCard: View {
             Spacer()
             Text(value)
                 .font(.system(size: 34, weight: .bold, design: .rounded))
+                .minimumScaleFactor(0.5)
+                .lineLimit(1)
             Text(subtitle.isEmpty ? title : subtitle)
                 .font(AppTheme.Font.caption)
                 .foregroundStyle(.secondary)
+                .minimumScaleFactor(0.7)
                 .lineLimit(2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

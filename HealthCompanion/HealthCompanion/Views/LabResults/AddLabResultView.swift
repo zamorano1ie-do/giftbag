@@ -78,6 +78,7 @@ struct AddLabResultView: View {
                             TextField("e.g. 14.5", text: $valueText)
                                 .keyboardType(.decimalPad)
                                 .font(.system(size: 28, weight: .bold, design: .rounded))
+                                .minimumScaleFactor(0.5)
                                 .padding(AppTheme.Spacing.md)
                                 .background(Color(.secondarySystemBackground))
                                 .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
