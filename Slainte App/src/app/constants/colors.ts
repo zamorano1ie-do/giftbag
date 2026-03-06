@@ -1,0 +1,16 @@
+export const C = {
+  primary: "#C75F71",
+  primaryLight: "#F0B8B8",
+  sage: "#A2AE9D",
+  sageDark: "#7d8f7a",
+  dark: "#54463A",
+  darkMid: "#7a6b5e",
+  bg: "#FAF9F7",
+  card: "#FFFFFF",
+  border: "#F0EBE8",
+  textPrimary: "#54463A",
+  textSecondary: "#9a8880",
+  pink50: "#fdf5f6",
+  pink100: "#faeaec",
+  sage50: "#f4f6f4",
+};

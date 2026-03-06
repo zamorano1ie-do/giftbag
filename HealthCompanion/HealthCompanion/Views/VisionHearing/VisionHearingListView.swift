@@ -24,8 +24,8 @@ struct VisionHearingListView: View {
                         .accessibilityLabel("Add eye test")
                     }
 
-                    if member.visionTests.isEmpty {
-                        emptyState("No Eye Tests", "Add your eye test results and prescriptions.")
+            if member.visionTests.isEmpty {
+                        SimpleEmptyStateView(title: "No Eye Tests", desc: "Add your eye test results and prescriptions.")
                     } else {
                         ForEach(member.visionTests.sorted { $0.date > $1.date }) { test in
                             VisionTestCard(test: test)
@@ -50,7 +50,7 @@ struct VisionHearingListView: View {
                     }
 
                     if member.hearingTests.isEmpty {
-                        emptyState("No Hearing Tests", "Add your audiogram and hearing test results.")
+                        SimpleEmptyStateView(title: "No Hearing Tests", desc: "Add your audiogram and hearing test results.")
                     } else {
                         ForEach(member.hearingTests.sorted { $0.date > $1.date }) { test in
                             HearingTestCard(test: test)
@@ -63,6 +63,19 @@ struct VisionHearingListView: View {
         .background(AppTheme.Background.grouped)
         .sheet(isPresented: $showAddVision) { AddVisionTestView(member: member) }
         .sheet(isPresented: $showAddHearing) { AddHearingTestView(member: member) }
+    }
+}
+
+struct SimpleEmptyStateView: View {
+    let title: String
+    let desc: String
+    var body: some View {
+        VStack(spacing: AppTheme.Spacing.xs) {
+            Text(title).font(.headline).foregroundStyle(.secondary)
+            Text(desc).font(AppTheme.Font.body).foregroundStyle(.secondary).multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(AppTheme.Spacing.lg)
     }
 }
 
@@ -228,6 +241,21 @@ struct EyeValueBadge: View {
                 .padding(.horizontal, 10).padding(.vertical, 4)
                 .background(color.opacity(0.15)).foregroundStyle(color)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
+    }
+}
+
+struct LabelValueRow: View {
+    let label: String
+    let value: String
+    var body: some View {
+        HStack(alignment: .top) {
+            Text(label)
+                .font(AppTheme.Font.label)
+                .foregroundStyle(.secondary)
+                .frame(width: 140, alignment: .leading)
+            Text(value)
+                .font(AppTheme.Font.body)
         }
     }
 }

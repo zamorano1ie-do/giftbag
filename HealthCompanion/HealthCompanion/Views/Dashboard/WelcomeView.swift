@@ -1,77 +1,134 @@
 import SwiftUI
 
+struct OnboardingPage: Identifiable {
+    let id = UUID()
+    let title: String
+    let subtitle: String
+    let icon: String
+    let color: Color
+}
+
 struct WelcomeView: View {
     @Binding var showAddMember: Bool
+    @State private var currentPage = 0
+
+    let pages: [OnboardingPage] = [
+        OnboardingPage(
+            title: "Welcome to\nSláinte",
+            subtitle: "Your personal health record — all your health information in one safe place, ready when you need it.",
+            icon: "heart.text.clipboard.fill",
+            color: Color.rose
+        ),
+        OnboardingPage(
+            title: "Track Your Vitals",
+            subtitle: "Keep a close eye on your blood pressure, weight, heart rate, and more over time.",
+            icon: "waveform.path.ecg",
+            color: AppTheme.Section.vitals
+        ),
+        OnboardingPage(
+            title: "Manage Records",
+            subtitle: "Store your blood test and lab results. Safely track all your prescriptions in one spot.",
+            icon: "drop.fill",
+            color: AppTheme.Section.labs
+        ),
+        OnboardingPage(
+            title: "Appointments\n& History",
+            subtitle: "Log your doctor visits, eye tests, and hearing checks. Manage it all for the whole family.",
+            icon: "stethoscope",
+            color: AppTheme.Section.appointments
+        )
+    ]
+
+    var body: some View {
+        VStack {
+            // Top Navigation Bar
+            HStack {
+                Spacer()
+                if currentPage < pages.count - 1 {
+                    Button(action: {
+                        withAnimation {
+                            currentPage = pages.count - 1
+                        }
+                    }) {
+                        Text("Skip")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding()
+                } else {
+                    // Invisible placeholder to keep spacing consistent
+                    Text("Skip")
+                        .font(.subheadline)
+                        .opacity(0)
+                        .padding()
+                }
+            }
+
+            TabView(selection: $currentPage) {
+                ForEach(0..<pages.count, id: \.self) { index in
+                    OnboardingPageView(page: pages[index])
+                        .tag(index)
+                }
+            }
+            .tabViewStyle(.page(indexDisplayMode: .always))
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
+
+            // Bottom Navigation Bar
+            VStack {
+                if currentPage < pages.count - 1 {
+                    PrimaryButton("Next", icon: "arrow.right") {
+                        withAnimation {
+                            currentPage += 1
+                        }
+                    }
+                } else {
+                    PrimaryButton("Get Started", icon: "checkmark.circle.fill") {
+                        showAddMember = true
+                    }
+                }
+            }
+            .padding(.horizontal, AppTheme.Spacing.xl)
+            .padding(.bottom, AppTheme.Spacing.xxl)
+            .padding(.top, AppTheme.Spacing.md)
+        }
+        .background(AppTheme.Background.grouped)
+    }
+}
+
+struct OnboardingPageView: View {
+    let page: OnboardingPage
 
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: min(AppTheme.Spacing.xl, geometry.size.height * 0.05)) {
-                Spacer(minLength: geometry.size.height * 0.05)
+            VStack(spacing: AppTheme.Spacing.xl) {
+                Spacer()
                 
-                Image(systemName: "heart.text.clipboard.fill")
-                    .font(.system(size: min(90, geometry.size.height * 0.15)))
-                    .foregroundStyle(Color.rose)
-                    .symbolEffect(.bounce)
-
-                VStack(spacing: min(AppTheme.Spacing.sm, geometry.size.height * 0.02)) {
-                    Text("Welcome to\nSláinte")
-                        .font(geometry.size.height < 600 ? AppTheme.Font.title : AppTheme.Font.hero)
+                Image(systemName: page.icon)
+                    .font(.system(size: min(120, geometry.size.height * 0.2)))
+                    .foregroundStyle(page.color)
+                    .symbolEffect(.bounce, options: .nonRepeating)
+                
+                VStack(spacing: AppTheme.Spacing.md) {
+                    Text(page.title)
+                        .font(AppTheme.Font.hero)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                         .minimumScaleFactor(0.5)
-
-                    Text("Your personal health record — all your health information in one safe place, ready when you need it.")
+                    
+                    Text(page.subtitle)
                         .font(AppTheme.Font.body)
                         .foregroundStyle(Color.warmBrown.opacity(0.65))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, AppTheme.Spacing.xl)
                         .minimumScaleFactor(0.7)
                 }
-
-                VStack(alignment: .leading, spacing: min(AppTheme.Spacing.md, geometry.size.height * 0.02)) {
-                    FeatureBullet(icon: "waveform.path.ecg", color: AppTheme.Section.vitals,
-                                  text: "Track blood pressure, weight, heart rate & more")
-                    FeatureBullet(icon: "drop.fill", color: AppTheme.Section.labs,
-                                  text: "Store blood test and lab results with reference ranges")
-                    FeatureBullet(icon: "pill.fill", color: AppTheme.Section.prescriptions,
-                                  text: "Track prescriptions and changes over time")
-                    FeatureBullet(icon: "stethoscope", color: AppTheme.Section.appointments,
-                                  text: "Log doctor visits and consultations")
-                    FeatureBullet(icon: "eye.fill", color: AppTheme.Section.vision,
-                                  text: "Record eye and hearing test results")
-                    FeatureBullet(icon: "person.2.fill", color: AppTheme.Section.history,
-                                  text: "Manage health records for the whole family")
-                }
-                .padding(min(AppTheme.Spacing.md, geometry.size.height * 0.02))
-                .background(Color(.secondarySystemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
-                .padding(.horizontal, AppTheme.Spacing.md)
                 
-                Spacer(minLength: geometry.size.height * 0.05)
-
-                PrimaryButton("Get Started", icon: "arrow.right.circle.fill") {
-                    showAddMember = true
-                }
-                .padding(.horizontal, AppTheme.Spacing.xl)
-                
-                Spacer(minLength: geometry.size.height * 0.05)
+                Spacer()
+                Spacer() // Extra spacer to push content up slightly for page dots
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .background(AppTheme.Background.grouped)
-    }
-}
-
-struct FeatureBullet: View {
-    let icon: String
-    let color: Color
-    let text: String
-
-    var body: some View {
-        HStack(spacing: AppTheme.Spacing.md) {
-            IconBadge(icon: icon, color: color, size: 36)
-            Text(text)
-                .font(AppTheme.Font.body)
+            .padding()
         }
     }
 }

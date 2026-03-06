@@ -4,64 +4,154 @@ import SwiftData
 struct DashboardView: View {
     let member: FamilyMember
     @State private var showQuickAdd = false
+    @State private var showNotification = false
+    
+    // For UI demonstration, we simulate medications
+    @State private var medications: [(id: UUID, name: String, time: String, taken: Bool)] = []
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: AppTheme.Spacing.lg) {
-                    // Greeting banner
-                    greetingBanner
+            ZStack(alignment: .top) {
+                AppTheme.Background.main
+                    .ignoresSafeArea()
 
-                    // Alerts (overdue vaccinations, expiring Rx, abnormal labs)
-                    alertsSection
+                ScrollView {
+                    VStack(spacing: 0) {
+                        headerSection
+                        
+                        // Overlapping card
+                        overviewCard
+                            .padding(.horizontal, AppTheme.Spacing.md)
+                            .offset(y: -16)
+                            .zIndex(10)
 
-                    // Quick stats grid
-                    quickStatsGrid
-
-                    // Recent activity
-                    recentActivity
-
-                    // Quick add section
-                    quickAddSection
+                        VStack(spacing: AppTheme.Spacing.lg) {
+                            todayMedications
+                            quickActionsGrid
+                        }
+                        .padding(.top, 4) // adjust for the -16 offset
+                        .padding(.horizontal, AppTheme.Spacing.md)
+                        .padding(.bottom, AppTheme.Spacing.xxl)
+                    }
                 }
-                .padding(AppTheme.Spacing.md)
+                .ignoresSafeArea(edges: .top)
+
+                if showNotification {
+                    iosNotificationBanner
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                        .zIndex(100)
+                }
             }
-            .background(AppTheme.Background.grouped)
-            .navigationTitle("My Health")
-            .navigationBarTitleDisplayMode(.large)
+            .onAppear {
+                setupMockMedications()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                        showNotification = true
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 7.5) {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        showNotification = false
+                    }
+                }
+            }
             .sheet(isPresented: $showQuickAdd) {
                 QuickAddView(member: member)
             }
         }
     }
+    
+    private func setupMockMedications() {
+        if medications.isEmpty {
+            medications = [
+                (UUID(), "Lisinopril 10mg", "8:00 AM", true),
+                (UUID(), "Atorvastatin 20mg", "9:00 PM", false),
+                (UUID(), "Metformin 500mg", "1:00 PM", true)
+            ]
+        }
+    }
 
-    // MARK: - Greeting
-
-    private var greetingBanner: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(greetingText)
-                    .font(AppTheme.Font.heading)
-                    .foregroundStyle(Color.sage)
-                Text(member.firstName)
-                    .font(AppTheme.Font.hero)
-                    .foregroundStyle(Color.warmBrown)
-            }
-            Spacer()
-            VStack(alignment: .trailing, spacing: 4) {
-                Text(Date().formatted(date: .abbreviated, time: .omitted))
-                    .font(AppTheme.Font.label)
-                    .foregroundStyle(.secondary)
-                if member.age > 0 {
-                    Text("Age \(member.age)")
-                        .font(AppTheme.Font.label)
-                        .foregroundStyle(.secondary)
+    // MARK: - Header
+    private var headerSection: some View {
+        VStack(spacing: 0) {
+            // Space for safe area / Dynamic Island
+            Spacer().frame(height: 60)
+            
+            HStack(alignment: .top) {
+                HStack(spacing: 12) {
+                    // Profile Icon
+                    ZStack {
+                        Circle()
+                            .fill(Color.blush)
+                            .frame(width: 46, height: 46)
+                            .overlay(Circle().stroke(Color.white.opacity(0.5), lineWidth: 2))
+                        Text(member.firstName.first.map { String($0) } ?? "👩")
+                            .font(.system(size: 18))
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(greetingText)
+                            .font(.system(size: 13))
+                            .foregroundStyle(Color.white.opacity(0.85))
+                        Text(member.firstName)
+                            .font(AppTheme.Font.heading.weight(.bold))
+                            .foregroundStyle(Color.white)
+                    }
+                }
+                
+                Spacer()
+                
+                Button(action: {
+                    withAnimation { showNotification = true }
+                }) {
+                    ZStack(alignment: .topTrailing) {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.white.opacity(0.2))
+                            .frame(width: 40, height: 40)
+                            .overlay(
+                                Image(systemName: "bell.fill")
+                                    .foregroundStyle(.white)
+                            )
+                        
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 8, height: 8)
+                            .overlay(Circle().stroke(Color.rose, lineWidth: 1.5))
+                            .offset(x: -8, y: 8)
+                    }
                 }
             }
+            .padding(.horizontal, AppTheme.Spacing.md)
+            
+            Text(formattedDate)
+                .font(.system(size: 13))
+                .foregroundStyle(Color.white.opacity(0.75))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, AppTheme.Spacing.md)
+                .padding(.top, 12)
+                .padding(.bottom, 28)
         }
-        .padding(AppTheme.Spacing.md)
-        .background(Color.blush.opacity(0.25))
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
+        .background(
+            LinearGradient(
+                colors: [Color.rose, Color(hex: "B8556A")],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        // Decorative circles
+        .overlay(alignment: .topTrailing) {
+            ZStack {
+                Circle()
+                    .fill(Color.white.opacity(0.1))
+                    .frame(width: 120, height: 120)
+                    .offset(x: 30, y: -30)
+                Circle()
+                    .fill(Color.white.opacity(0.08))
+                    .frame(width: 60, height: 60)
+                    .offset(x: -30, y: 10)
+            }
+        }
+        .clipped()
     }
 
     private var greetingText: String {
@@ -72,182 +162,305 @@ struct DashboardView: View {
         default:      return "Good evening,"
         }
     }
+    
+    private var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, d MMMM yyyy"
+        return formatter.string(from: Date())
+    }
+    
+    // MARK: - Overview Card
+    private var overviewCard: some View {
+        let takenCount = medications.filter { $0.taken }.count
+        let totalCount = medications.count
+        let progressRatio = totalCount > 0 ? Double(takenCount) / Double(totalCount) : 0
 
-    // MARK: - Alerts
-
-    @ViewBuilder
-    private var alertsSection: some View {
-        let alerts = buildAlerts()
-        if !alerts.isEmpty {
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                Label("Things to Check", systemImage: "bell.badge.fill")
-                    .font(AppTheme.Font.heading)
-                    .foregroundStyle(Color.rose)
-
-                ForEach(alerts, id: \.self) { alert in
-                    HStack(spacing: AppTheme.Spacing.sm) {
-                        Image(systemName: "exclamationmark.circle.fill")
+        return VStack(alignment: .leading, spacing: 12) {
+            Text("TODAY'S OVERVIEW")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(Color.textSecondary)
+                .tracking(0.5)
+            
+            HStack(spacing: 12) {
+                // Medications
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "pill.fill")
                             .foregroundStyle(Color.rose)
-                            .font(.title3)
-                        Text(alert)
-                            .font(AppTheme.Font.body)
-                            .foregroundStyle(Color.warmBrown)
-                        Spacer()
+                            .font(.system(size: 14))
+                        Text("Medications")
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color.textSecondary)
                     }
-                    .padding(AppTheme.Spacing.md)
-                    .background(Color.blush.opacity(0.22))
-                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
+                    
+                    HStack(alignment: .firstTextBaseline, spacing: 2) {
+                        Text("\(takenCount)")
+                            .font(.system(size: 22, weight: .bold))
+                            .foregroundStyle(Color.textPrimary)
+                        Text("/\(totalCount)")
+                            .font(.system(size: 14))
+                            .foregroundStyle(Color.textSecondary)
+                    }
+                    
+                    Text("taken today")
+                        .font(.system(size: 11))
+                        .foregroundStyle(Color.rose)
                 }
+                .padding(12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.pink50)
+                .clipShape(RoundedRectangle(cornerRadius: 14))
+                
+                // Appointments
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "stethoscope")
+                            .foregroundStyle(Color.sageDark)
+                            .font(.system(size: 14))
+                        Text("Appointment")
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color.textSecondary)
+                    }
+                    
+                    Text("Dr. Chen")
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundStyle(Color.textPrimary)
+                    
+                    Text("Today · 10:30 AM")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(Color.sageDark)
+                    
+                    HStack(alignment: .top, spacing: 4) {
+                        Image(systemName: "mappin.and.ellipse")
+                            .font(.system(size: 11))
+                            .foregroundStyle(Color.textSecondary)
+                            .padding(.top, 1)
+                        Text("City Medical Centre\n45 Park Lane, Level 2")
+                            .font(.system(size: 11))
+                            .foregroundStyle(Color.textSecondary)
+                            .lineLimit(2)
+                    }
+                }
+                .padding(12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.sage50)
+                .clipShape(RoundedRectangle(cornerRadius: 14))
             }
+            
+            // Progress Bar
+            VStack(spacing: 8) {
+                HStack {
+                    Text("Medication progress")
+                        .font(.system(size: 13))
+                        .foregroundStyle(Color.textSecondary)
+                    Spacer()
+                    Text("\(Int(progressRatio * 100))%")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(Color.rose)
+                }
+                
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 3)
+                            .fill(Color.border)
+                            .frame(height: 6)
+                        RoundedRectangle(cornerRadius: 3)
+                            .fill(Color.rose)
+                            .frame(width: geo.size.width * CGFloat(progressRatio), height: 6)
+                            .animation(.spring(), value: progressRatio)
+                    }
+                }
+                .frame(height: 6)
+            }
+            .padding(.top, 4)
         }
+        .padding(16)
+        .background(Color.card)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .shadow(color: Color.warmBrown.opacity(0.12), radius: 10, x: 0, y: 4)
     }
 
-    private func buildAlerts() -> [String] {
-        var alerts: [String] = []
-
-        // Expiring prescriptions
-        let expiringRx = member.prescriptions.filter { $0.isActive && $0.isExpiringSoon }
-        for rx in expiringRx {
-            alerts.append("\(rx.medicationName) prescription expires soon")
-        }
-
-        // Overdue vaccinations
-        let overdueVaccines = member.vaccinations.filter { $0.isDue }
-        for vax in overdueVaccines {
-            alerts.append("\(vax.name) vaccination is overdue")
-        }
-
-        // Abnormal lab results in last 3 months
-        let recentAbnormalLabs = member.labResults.filter {
-            $0.computedStatus != .normal && $0.computedStatus != .pending &&
-            $0.testedAt > Calendar.current.date(byAdding: .month, value: -3, to: Date())!
-        }
-        if !recentAbnormalLabs.isEmpty {
-            alerts.append("\(recentAbnormalLabs.count) recent lab result(s) outside normal range")
-        }
-
-        // Upcoming appointments
-        let upcoming = member.appointments.filter {
-            !$0.isPast && $0.date.timeIntervalSinceNow < 7 * 24 * 3600
-        }
-        for appt in upcoming {
-            alerts.append("Appointment with \(appt.doctorName) on \(appt.date.formatted(date: .abbreviated, time: .shortened))")
-        }
-        _ = upcoming // suppress warning
-
-        return Array(alerts.prefix(4))
-    }
-
-    // MARK: - Quick Stats Grid
-
-    private var quickStatsGrid: some View {
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: AppTheme.Spacing.md) {
-            StatCard(
-                title: "Active Medications",
-                value: "\(member.activePrescriptions.count)",
-                icon: "pill.fill",
-                color: AppTheme.Section.prescriptions
-            )
-            StatCard(
-                title: "Conditions",
-                value: "\(member.activeConditions.count)",
-                icon: "cross.fill",
-                color: AppTheme.Section.history
-            )
-            StatCard(
-                title: "Appointments",
-                value: "\(member.appointments.filter { !$0.isPast }.count)",
-                icon: "stethoscope",
-                color: AppTheme.Section.appointments,
-                subtitle: "upcoming"
-            )
-            StatCard(
-                title: "Allergies",
-                value: "\(member.allergies.count)",
-                icon: "allergens.fill",
-                color: AppTheme.Section.vitals
-            )
-        }
-    }
-
-    // MARK: - Recent Activity
-
-    @ViewBuilder
-    private var recentActivity: some View {
-        let recentVitals = Array(member.vitals.sorted { $0.recordedAt > $1.recordedAt }.prefix(3))
-        if !recentVitals.isEmpty {
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                Text("Recent Vitals")
-                    .font(AppTheme.Font.heading)
-
-                ForEach(recentVitals) { vital in
-                    HStack {
-                        IconBadge(icon: vital.type.icon, color: AppTheme.Section.vitals, size: 40)
-
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(vital.type.rawValue)
-                                .font(AppTheme.Font.subhead)
-                            Text(vital.recordedAt.formatted(date: .abbreviated, time: .omitted))
-                                .font(AppTheme.Font.caption)
-                                .foregroundStyle(.secondary)
+    // MARK: - Today's Medications
+    private var todayMedications: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 8) {
+                Image(systemName: "clock.fill")
+                    .foregroundStyle(Color.rose)
+                    .font(.system(size: 16))
+                Text("Today's Medications")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.rose)
+            }
+            .padding(.bottom, 2)
+            
+            ForEach(Array(medications.enumerated()), id: \.element.id) { index, med in
+                HStack(spacing: 10) {
+                    if med.taken {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(Color(hex: "5DAB6F"))
+                            .font(.system(size: 18))
+                    } else {
+                        Circle()
+                            .strokeBorder(Color.border, lineWidth: 2)
+                            .frame(width: 18, height: 18)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(med.name)
+                            .font(.system(size: 14))
+                            .foregroundStyle(Color.textPrimary)
+                            .strikethrough(med.taken)
+                            .opacity(med.taken ? 0.6 : 1.0)
+                        Text(med.time)
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color.textSecondary)
+                    }
+                    
+                    Spacer()
+                    
+                    if !med.taken {
+                        Button(action: {
+                            if let idx = medications.firstIndex(where: { $0.id == med.id }) {
+                                withAnimation {
+                                    medications[idx].taken = true
+                                }
+                            }
+                        }) {
+                            Text("Take")
+                                .font(AppTheme.Font.body.weight(.semibold))
+                                .font(.system(size: 12))
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 5)
+                                .background(Color.rose)
+                                .foregroundStyle(.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
-
-                        Spacer()
-
-                        Text(vital.displayValue)
-                            .font(AppTheme.Font.subhead)
-                            .fontWeight(.semibold)
                     }
-                    .padding(AppTheme.Spacing.md)
-                    .background(Color(.secondarySystemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm))
+                }
+                .padding(.vertical, 8)
+                
+                if index < medications.count - 1 {
+                    Divider()
+                        .background(Color.blush.opacity(0.5)) // F0B8B8
                 }
             }
         }
+        .padding(16)
+        .background(Color.blush.opacity(0.40)) // .primaryLight + 40 opacity
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.blush, lineWidth: 1)
+        )
     }
 
-    // MARK: - Quick Add
-
-    private var quickAddSection: some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-            Text("Record Something")
-                .font(AppTheme.Font.heading)
-
-            PrimaryButton("Add Health Information", icon: "plus.circle.fill") {
-                showQuickAdd = true
+    // MARK: - Quick Actions Grid
+    private var quickActionsGrid: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Quick Actions")
+                .font(.system(size: 16, weight: .bold))
+                .foregroundStyle(Color.textPrimary)
+            
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+                QuickActionBox(label: "Log Vitals", icon: "waveform.path.ecg", color: Color.rose, bg: Color.pink100) { showQuickAdd = true }
+                QuickActionBox(label: "Test Results", icon: "flask.fill", color: Color.sageDark, bg: Color.sage50) {  }
+                QuickActionBox(label: "Doctor Visit", icon: "stethoscope", color: Color.darkMid, bg: Color(hex: "F3EDE8")) {  }
+                QuickActionBox(label: "Prescriptions", icon: "pill.fill", color: Color(hex: "8B6FA0"), bg: Color(hex: "F3EEF8")) {  }
+                QuickActionBox(label: "My History", icon: "doc.text.fill", color: Color(hex: "C47C2F"), bg: Color(hex: "FDF3E7")) {  }
             }
         }
+    }
+    
+    // MARK: - Notification Banner
+    private var iosNotificationBanner: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            HStack(alignment: .center, spacing: 10) {
+                // App Icon mock
+                ZStack {
+                    LinearGradient(colors: [Color.rose, Color(hex: "b8556a")], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        .frame(width: 36, height: 36)
+                        .clipShape(RoundedRectangle(cornerRadius: 9))
+                    Text("❤️")
+                        .font(.system(size: 18))
+                }
+                
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack {
+                        Text("MYHEALTH COMPANION")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundStyle(Color.primary)
+                            .tracking(0.3)
+                        Spacer()
+                        Text("now")
+                            .font(.system(size: 11))
+                            .foregroundStyle(.secondary)
+                    }
+                    Text("💊 Prescription Refill Reminder")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(Color.primary)
+                    Text("Your Lisinopril refill is due in 10 days. Contact Dr. Chen to request a renewal.")
+                        .font(.system(size: 13))
+                        .foregroundStyle(Color.primary.opacity(0.8))
+                        .lineLimit(2)
+                }
+                
+                Button(action: {
+                    withAnimation { showNotification = false }
+                }) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 16))
+                        .foregroundStyle(Color.primary.opacity(0.4))
+                }
+                .padding(.bottom, 24) // align to top right
+            }
+        }
+        .padding(.vertical, 12)
+        .padding(.horizontal, 14)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: Color.black.opacity(0.18), radius: 32, y: 8)
+        .shadow(color: Color.black.opacity(0.08), radius: 8, y: 2)
+        .padding(.horizontal, 16)
+        .padding(.top, 12)
     }
 }
 
-// MARK: - Stat Card
-
-struct StatCard: View {
-    let title: String
-    let value: String
+fileprivate struct QuickActionBox: View {
+    let label: String
     let icon: String
     let color: Color
-    var subtitle: String = ""
-
+    let bg: Color
+    let action: () -> Void
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-            IconBadge(icon: icon, color: color, size: 40)
-            Spacer()
-            Text(value)
-                .font(.system(size: 34, weight: .bold, design: .rounded))
-                .minimumScaleFactor(0.5)
-                .lineLimit(1)
-            Text(subtitle.isEmpty ? title : subtitle)
-                .font(AppTheme.Font.caption)
-                .foregroundStyle(.secondary)
-                .minimumScaleFactor(0.7)
-                .lineLimit(2)
+        Button(action: action) {
+            VStack(spacing: 8) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(color.opacity(0.22))
+                        .frame(width: 40, height: 40)
+                    Image(systemName: icon)
+                        .font(.system(size: 20, weight: .regular))
+                        .foregroundStyle(color)
+                }
+                
+                Text(label)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Color.textPrimary)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+            }
+            .padding(.vertical, 14)
+            .padding(.horizontal, 10)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(bg)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(color.opacity(0.22), lineWidth: 1)
+            )
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(AppTheme.Spacing.md)
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
-        .frame(minHeight: 130)
+        .buttonStyle(.plain)
     }
 }
 
@@ -256,8 +469,6 @@ struct StatCard: View {
 struct QuickAddView: View {
     let member: FamilyMember
     @Environment(\.dismiss) private var dismiss
-
-    private let options: [(String, String, Color, AnyView)] = []
 
     var body: some View {
         NavigationStack {
@@ -316,3 +527,4 @@ struct QuickAddButton: View {
         .buttonStyle(.plain)
     }
 }
+
