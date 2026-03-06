@@ -33,7 +33,6 @@ enum AppFont {
 // MARK: - Pastel Garden colours
 
 extension Color {
-    /// #C75F71 — deep rose, primary accent
     static let rose        = Color(hex: "C75F71")
     /// #F0B8B8 — blush pink, soft backgrounds & highlights
     static let blush       = Color(hex: "F0B8B8")
@@ -44,6 +43,19 @@ extension Color {
 
     /// Very light blush — used as grouped background tint
     static let blushBackground = Color(hex: "FBF0F0")
+    
+    // Web App Layout Colors
+    static let sageDark      = Color(hex: "7D8F7A")
+    static let darkMid       = Color(hex: "7A6B5E")
+    static let dark          = Color(hex: "54463A")
+    static let textPrimary   = Color(hex: "54463A")
+    static let textSecondary = Color(hex: "9A8880")
+    static let border        = Color(hex: "F0EBE8")
+    static let bg            = Color(hex: "FAF9F7")
+    static let card          = Color(hex: "FFFFFF")
+    static let pink50        = Color(hex: "FDF5F6")
+    static let pink100       = Color(hex: "FAEAEC")
+    static let sage50        = Color(hex: "F4F6F4")
 
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -111,8 +123,9 @@ enum AppTheme {
 
     // MARK: Background tints
     enum Background {
+        static let main     = Color.bg
         static let grouped  = Color.blushBackground
-        static let card     = Color(.secondarySystemBackground)
+        static let card     = Color.card
         static let input    = Color(.tertiarySystemBackground)
     }
 }
