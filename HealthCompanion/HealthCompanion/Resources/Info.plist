@@ -64,5 +64,7 @@
         <string>OpenSans-Bold.ttf</string>
         <string>OpenSans-ExtraBold.ttf</string>
     </array>
+    <key>UILaunchScreen</key>
+    <dict/>
 </dict>
 </plist>
